@@ -4,6 +4,7 @@ import { getCountries } from './services/countries';
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,9 +13,24 @@ function App() {
     };
     fetchData();
   }, []);
+
+  function filterCountries() {
+    return countries.filter((c) => {
+      return c.continent.includes(query);
+    });
+  }
+
   return (
     <div className="App">
       <h1>Countries of the World</h1>
+      <input
+        placeholder="Search Countries"
+        type="text"
+        value={query}
+        onChange={(elem) => {
+          setQuery(elem.target.value);
+        }}
+      />
       <div className="Country">
         {countries.map((country) => (
           <p key={country.id}>
