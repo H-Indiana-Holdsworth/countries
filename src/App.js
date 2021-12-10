@@ -17,7 +17,9 @@ function App() {
 
   function filterCountries() {
     return countries.filter((c) => {
-      return c.name.includes(query) && (c.continent === continent || continent === 'All');
+      return (
+        c.name.toLowerCase().includes(query) && (c.continent === continent || continent === 'All')
+      );
     });
   }
 
@@ -25,6 +27,7 @@ function App() {
     <div className="App">
       <h1>Countries of the World</h1>
       <input
+        autoCapitalize="true"
         placeholder="Search Countries"
         type="text"
         value={query}
